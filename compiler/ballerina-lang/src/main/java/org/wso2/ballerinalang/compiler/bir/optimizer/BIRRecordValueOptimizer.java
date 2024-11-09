@@ -192,7 +192,8 @@ public class BIRRecordValueOptimizer extends BIRVisitor {
         }
         BIRNode.BIRBasicBlock firstBB = defaultFunction.basicBlocks.get(0);
         BIRNode.BIRBasicBlock secondBB = defaultFunction.basicBlocks.get(1);
-        if (!secondBB.instructions.isEmpty() || secondBB.terminator.kind != InstructionKind.RETURN) {
+        if (!secondBB.instructions.isEmpty() || secondBB.terminator.kind != InstructionKind.RETURN ||
+                firstBB.terminator.kind == InstructionKind.CALL) {
             return false;
         }
         return switch (firstBB.instructions.size()) {
